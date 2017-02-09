@@ -1,5 +1,9 @@
 #import "RNCookieManagerIOS.h"
+#if __has_include("RCTConvert.h")
+#import "RCTConvert.h"
+#else
 #import <React/RCTConvert.h>
+#endif
 
 @implementation RNCookieManagerIOS
 
@@ -53,6 +57,14 @@ RCT_EXPORT_METHOD(clearAll:(RCTResponseSenderBlock)callback) {
         [cookieStorage deleteCookie:c];
     }
     callback(@[[NSNull null]]);
+}
+
+
+RCT_EXPORT_METHOD(clearAll) {
+    NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (NSHTTPCookie *c in cookieStorage.cookies) {
+        [cookieStorage deleteCookie:c];
+    }
 }
 
 RCT_EXPORT_METHOD(clearByName:(NSString *)name callback:(RCTResponseSenderBlock)callback) {
