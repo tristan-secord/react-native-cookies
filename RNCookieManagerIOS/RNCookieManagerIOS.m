@@ -59,14 +59,6 @@ RCT_EXPORT_METHOD(clearAll:(RCTResponseSenderBlock)callback) {
     callback(@[[NSNull null]]);
 }
 
-
-RCT_EXPORT_METHOD(clearAll) {
-    NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-    for (NSHTTPCookie *c in cookieStorage.cookies) {
-        [cookieStorage deleteCookie:c];
-    }
-}
-
 RCT_EXPORT_METHOD(clearByName:(NSString *)name callback:(RCTResponseSenderBlock)callback) {
     NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
     for (NSHTTPCookie *c in cookieStorage.cookies) {
